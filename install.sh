@@ -74,25 +74,25 @@ list_devices() {
     i=1
 
     # Find ttyUSB and ttyACM devices
-    for dev in /dev/ttyUSB* /dev/ttyACM* 2>/dev/null; do
-        if [ -e "$dev" ]; then
-            DEVICES+=("$dev")
-            # Try to get device info
-            DEVINFO=""
-            if [ -r "/sys/class/tty/$(basename "$dev")/device/interface" ]; then
-                DEVINFO=$(cat "/sys/class/tty/$(basename "$dev")/device/interface" 2>/dev/null || echo "")
-            fi
-            if [ -z "$DEVINFO" ] && [ -r "/sys/class/tty/$(basename "$dev")/device/../product" ]; then
-                DEVINFO=$(cat "/sys/class/tty/$(basename "$dev")/device/../product" 2>/dev/null || echo "")
-            fi
-            if [ -n "$DEVINFO" ]; then
-                echo -e "  ${GREEN}$i)${NC} $dev - $DEVINFO"
-            else
-                echo -e "  ${GREEN}$i)${NC} $dev"
-            fi
-            ((i++))
+    shopt -s nullglob
+    for dev in /dev/ttyUSB* /dev/ttyACM*; do
+        DEVICES+=("$dev")
+        # Try to get device info
+        DEVINFO=""
+        if [ -r "/sys/class/tty/$(basename "$dev")/device/interface" ]; then
+            DEVINFO=$(cat "/sys/class/tty/$(basename "$dev")/device/interface" 2>/dev/null || echo "")
         fi
+        if [ -z "$DEVINFO" ] && [ -r "/sys/class/tty/$(basename "$dev")/device/../product" ]; then
+            DEVINFO=$(cat "/sys/class/tty/$(basename "$dev")/device/../product" 2>/dev/null || echo "")
+        fi
+        if [ -n "$DEVINFO" ]; then
+            echo -e "  ${GREEN}$i)${NC} $dev - $DEVINFO"
+        else
+            echo -e "  ${GREEN}$i)${NC} $dev"
+        fi
+        ((i++))
     done
+    shopt -u nullglob
 
     if [ ${#DEVICES[@]} -eq 0 ]; then
         warn "No serial devices found!"

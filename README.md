@@ -17,13 +17,13 @@ This plugin reads temperature data from an Arduino connected via USB serial port
 Run the install script which will guide you through device selection:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RadiatorTwo/cc-ardutemp/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RadiatorTwo/cc-ardutemp/master/install.sh | bash
 ```
 
 Or install a specific version:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RadiatorTwo/cc-ardutemp/main/install.sh | bash -s -- v0.1.0
+curl -fsSL https://raw.githubusercontent.com/RadiatorTwo/cc-ardutemp/master/install.sh | bash -s -- v0.1.0
 ```
 
 ### From Source
