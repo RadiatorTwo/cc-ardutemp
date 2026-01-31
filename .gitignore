@@ -1,0 +1,21 @@
+# Build artifacts
+/target/
+/vendor/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Debug
+*.log
+
+# Local configuration
+.env
+.env.local

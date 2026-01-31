@@ -1,0 +1,9 @@
+# CoolerControl Service Plugin Manifest
+
+id = "ardu-temp-bridge"
+type = "device"
+description = "Arduino Temperature Sensors via Serial"
+version = "0.1.0"
+executable = "ardu-temp-bridge"
+args = "--device /dev/ttyUSB0 --baud 57600"
+privileged = true
